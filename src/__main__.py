@@ -2,7 +2,7 @@ import inventory
 
 # database
 database = [
-    # tambah kode barang
+    # tambah sold_items & revenue
         {'ModelNumber': 'A2849', 'Model': 'iPhone 15 Pro Max', 'Status': 'new', 'Storage': 512, 'Price': 28999999, 'Stock': 7},
         {'ModelNumber': 'A3090', 'Model': 'iPhone 15', 'Status': 'new', 'Storage': 256, 'Price': 18499000, 'Stock': 12},
         {'ModelNumber': 'A2889', 'Model': 'iPhone 14 Pro', 'Status': 'second', 'Storage': 512, 'Price': 17500000, 'Stock': 15},
@@ -21,7 +21,6 @@ def menu(database):
     """
     # clear display
     inventory.clear_display()
-
     # authenticate user
     authenticated_user = inventory.authenticate_user()
 
@@ -34,7 +33,10 @@ def menu(database):
             print("3. Modify an item")
             print("4. Remove an item")
             print("5. Exit and log out")
+
+            # request a user input
             choice = input("\nPlease input your choice (1-5): ")
+
             if choice == "1":
                 inventory.display_item(database)
             elif choice == "2":
@@ -48,7 +50,7 @@ def menu(database):
                 print("Terminating the program. See you later!")
                 break
             else:
-                print("Oops, the option you have entered is invalid. Input num 1 to 5 only.")
+                print("Invlid input. Please enter number (1-5).")
 
 # call menu() function
 menu(database)

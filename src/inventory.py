@@ -1,6 +1,6 @@
-from tabulate import tabulate  # for displaying db in table
-import os                      # for cleaning the display
-import re                      # for matching iPhone model number
+from tabulate import tabulate       # for displaying db in table
+import os                           # for cleaning the display
+import re                           # for matching iPhone model number
 
 # ++++++++++ CLEAN DISPLAY ++++++++++ 
 def clear_display():
@@ -14,28 +14,27 @@ def clear_display():
     else:
         _ = os.system("clear")
 
-# AUTHENTICATE USER
+
+#  ++++++++++ AUTHENTICATE USER ++++++++++ 
 credentials = {"admin": "admin1234",
                "manager": "password1234"}
 
-
-#  ++++++++++ AUTHENTICATE USER ++++++++++ 
 def authenticate_user():
     """Function to authenticate user
     Args:
         No args
 
     Returns:
-        Bool: Matching 
+        Boolean: Matching inputted username and password with existing credentials
     """
     attempts = 3
     while attempts > 0:
         username_input = input("Key in your username: ")
         password_input = input("Enter your password: ")
 
-        # check username and password
+        # check username and password if matching with credentials dict
         if username_input in credentials and password_input == credentials[username_input]:
-             print(f"Authentication success. Welcome to SmarPi Inventory Management, {username_input}!")
+             print(f"Authentication success. Welcome to AppleHome Sales Inventory Management, {username_input}!")
              return True
         else:
             # Reduce the attempts in each failure
@@ -247,96 +246,130 @@ def get_valid_index(max_idx, message):
             print("Oops, only a number allowed. Please enter a valid number.")
 
 
-#  ++++++++++ MODIFY ITEMS ++++++++++ 
+# ++++++++++ MODIFY ITEMS ++++++++++
 def modify_item(database):
     """Function to modify or update item in database
 
     Args:
         database (table): Smartphone data
     """
-    print("Here is the full database:")
+    print("Here is the current inventory:")
     headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock"]
     rows = []
 
-    # iterate over idx and item in DB
+    # iterate over idx and item in database
     for idx, item in enumerate(database, start=1):
         row = [idx, item["ModelNumber"], item["Model"], item["Status"], item["Storage"], item["Price"], item["Stock"]]
+        
         # add row to rows
         rows.append(row)
 
     # display items in table
     print(tabulate(rows, headers=headers, tablefmt="simple_outline"))
 
+    # get item to modify
     idx = get_valid_index(len(database), "Which item will you modify? \nPlease input the item ID to start modifying: ")
-
     item_to_modify = database[idx - 1]
 
-    # request and check new model number
+    # ask user to specify the modification
     while True:
-        new_model_number = input(f"Enter new model number (current: {item_to_modify['ModelNumber']}): ")
-        # check if input matches 4-digit string starting with alphabet 
-        if re.match(r"^[A-Za-z]\d{4}$", new_model_number):
-            break # ==================================== PERLU DITANYAKAN: DUPLICATE VALIDATION ====================================
-            # if any(item["ModelNumber"] == code for item in database):
-            #     print("This entry already exists. Please try another.")
-            #     continue
-            # else:
-            #     break
-        else:
-            print("Invalid input. Please input a valid model number based on the box.")
+        print("\nSelect item detail to modify")
+        print("1. Model Number")
+        print("2. Model")
+        print("3. Status")
+        print("4. Storage")
+        print("5. Price")
+        print("6. Stock")
+        print("7. Modify All Details")
+        print("8. Back to Main Menu")
 
-    # request input from user
-    new_model = input(f"Enter new model (current: {item_to_modify['Model']}): ")
-    new_status = input(f"Enter new status (current: {item_to_modify['Status']}) ")
+        choice = input("\nEnter your choice (1-8): ")
 
-    # request and check new storage
-    while True:
-        new_storage = input(f"Enter new storage (current: {item_to_modify['Storage']}): ")
-        # check if input is numeric and bigger than 0
-        if new_storage.isdigit() and int(new_storage) > 0:
+        if choice == "1":
+            # modify model number
+            new_model_number = input(f"Enter new model number (current: {item_to_modify['ModelNumber']}): ")
+            if re.match(r"^[A-Za-z]\d{4}$", new_model_number):
+                if any(item["ModelNumber"] == new_model_number for item in database):
+                    print("This entry already exists. Please try another.")
+                else:
+                    item_to_modify["ModelNumber"] == new_model_number
+                    print("Model nuumber updated.")
+            else:
+                print("Invalid input. Please input a valid model number based on the box: ")
+
+        elif choice == "2":
+            # modify model
+            new_model = input(f"Enter new model number (current: {item_to_modify['Model']}): ")
+            item_to_modify["Model"] = new_model
+            print("Model updated.")
+        
+        elif choice == "3":
+            # modify status
+            new_status = input(f"Enter new model number (current: {item_to_modify['Status']}): ")
+            item_to_modify["Status"] = new_status
+            print("Status has been updated.")
+        
+        elif choice == "4":
+            # modify storage
+            new_storage = input(f"Enter new model number (current: {item_to_modify['Storage']}): ")
+            if new_storage.isdigit() and int(new_storage) > 0:
+                item_to_modify["Storage"] = new_storage
+                print("Storage has been updated.")
+            else:
+                print("Invalid input. Please input a valid number for storage.")
+        
+        elif choice == "5":
+            # modify price
+            new_price = input(f"Enter new model number (current: {item_to_modify['Price']}): ")
+            if new_price.isdigit() and int(new_price) > 0:
+                item_to_modify["Price"] = int(new_price)
+                print("Price has been updated.")
+            else:
+                print("Invalid input. Please input a valid amount.")
+        
+        elif choice == "6":
+            # modify stock
+            try:
+                new_stock = input(f"Enter new model number (current: {item_to_modify['Stock']}): ")
+                if new_stock.isdigit() and int(new_stock) >= 0:
+                    item_to_modify["Stock"] = int(new_stock)
+                    print("Stock has been updated.")
+                else:
+                    print("Sorry, the quantity should be 0 or more. Please try again.")
+            except ValueError:
+                print("Invalid input. Please input a valid number.")
+        
+        elif choice == "7":
+            # modify entire row
+            new_model_number = input(f"Enter new model number (current: {item_to_modify['ModelNumber']}): ")
+            new_model = input(f"Enter new model number (current: {item_to_modify['Model']}): ")
+            new_status = input(f"Enter new model number (current: {item_to_modify['Status']}): ")
+            new_storage = input(f"Enter new model number (current: {item_to_modify['Storage']}): ")
+            new_price = input(f"Enter new model number (current: {item_to_modify['Price']}): ")
+            new_stock = input(f"Enter new model number (current: {item_to_modify['Stock']}): ")
+
+            if (
+                re.match(r"^[A-Za-z]\d{4}$", new_model_number)
+                and new_model.isdigit()
+                and new_price.isdigit()
+                and new_stock.isdigit() and int(new_stock) >= 0
+            ):
+                item_to_modify.update({
+                    "ModelNumber": new_model_number,
+                    "Model": new_model,
+                    "Status": new_status,
+                    "Storage": int(new_storage),
+                    "Price": int(new_price),
+                    "Stock": int("new_stock")
+                })
+                print("All details have been updated.")
+            else:
+                print("Invalid input. Please check your inputs and try again.")
+            
+        elif choice == "8":
             break
         else:
-            print("Invalid input. Please input a valid number for storage (in Gb)")
-
-    # request and check new price
-    while True:
-        new_price = input(f"Enter new price (current: {item_to_modify['Price']}): ")
-        # check if input is numeric and bigger than 0
-        if new_price.isdigit() and int(new_price) > 0:
-            break
-        else:
-            print("Input invalid. Please input a valid amount.")
-    
-    # request and check new stock
-    while True:
-        try:
-            new_stock = input(f"Enter new stock (current: {item_to_modify['Stock']}): ")
-            # check if input is numeric and bigger or equals to 0
-            if new_stock.isdigit() and int(new_stock) >= 0:
-                break
-            else: 
-                print("Sorry, the quantity should be 0 or more. Please try again.")
-        except:
-            print("It seems you have entered invalid input for the stock. Please re-input the correct value.")
-
-    while True:
-        choice = input("Do you want to save the update? [Y/N]: ").upper()
-
-        if choice == "Y":
-            item_to_modify.update({
-                "Model": new_model,
-                "Status": new_status,
-                "Storage": int(new_storage),
-                "Price": int(new_price),
-                "Stock": int(new_stock)
-            })
-            # print confirmation message
-            print("Updated. Please select 'Display items' to see the changes.")
-        elif choice == 'N':
-            print("OK. The update canceled.")
-            break
-        else:
-            print("Invalid input. Please 'Y' or 'N'.")
+            print("Invalid input. Please enter a valid number (1-8).")
 
 # REMOVE ITEMS
 def remove_item(database):
