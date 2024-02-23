@@ -5,10 +5,11 @@ SmartPi is a sales inventory management developed for AppleHome, a fictional sto
 
 ## Credentials
 
->[!info] Credentials
->For security purposes, only two roles are given the access. Here are dummy credentials that can be used to operate the application.
->- `admin`: `admin1234`,
->- `manager`: `password1234`
+> [!IMPORTANT] 
+> For security purposes, only two roles are given the access. Here are dummy credentials that can be used to operate the application.
+
+- `admin`: `admin1234`,
+- `manager`: `password1234`
 
 ## Main features
 1. Display items
