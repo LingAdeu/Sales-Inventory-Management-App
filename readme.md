@@ -30,7 +30,8 @@ SmartPi is a sales inventory management developed for AppleHome, a fictional sto
     .
     ├── README.md            <- The top-level README for developers using this project.
     ├── docs
-    │   └── requirements.txt <- The requirements file for reproducing the env. Generated using `pip freeze > requirements.txt`
+    │   └── requirements.txt <- The requirements file for reproducing the env. 
+    |                            Generated using `pip freeze > requirements.txt`
     └── src                  <- Source codes
         ├── __main__.py      <- The main file used to run the program.
         └── inventory.py     <- The module file containing the functions.
