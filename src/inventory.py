@@ -14,7 +14,6 @@ def clear_display():
     else:
         _ = os.system("clear")
 
-
 #  ++++++++++ AUTHENTICATE USER ++++++++++ 
 credentials = {"admin": "admin1234",
                "manager": "password1234"}
@@ -27,13 +26,17 @@ def authenticate_user():
     Returns:
         Boolean: Matching inputted username and password with existing credentials
     """
+    # initialize attempts
     attempts = 3
+
+    # enter loop to request and validate username and password
     while attempts > 0:
         username_input = input("Key in your username: ")
         password_input = input("Enter your password: ")
 
         # check username and password if matching with credentials dict
         if username_input in credentials and password_input == credentials[username_input]:
+             # print to indicate successful login
              print(f"\nAuthentication success.\nWelcome to AppleHome Sales Inventory Management, {username_input}!")
              return True
         else:
@@ -41,6 +44,7 @@ def authenticate_user():
             attempts -= 1
             print(f"Login failed. You have {attempts} attempts left. \nPlease double-check your username and password.")
     
+    # print to indicate unsuccesful login after 3 times
     print("Max attempt reached. Terminating the program now...")
     return False
 
@@ -102,26 +106,36 @@ def display_item(database):
 
         # execute code if user selects 3   
         elif choice == "3":
+            # iterating over item in database where status is new
             new_items = [item for item in database if item["Status"] == "new"]
 
+            # if no new items, print the message
             if not new_items:
                 print("No brand-new items found.")
+            
+            # if any new items, put them in table
             else:
                 headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock", "ItemSold"]
                 rows = []
 
+                # iterate over new items
                 for idx, item in enumerate(new_items, start=1):
                     row = [idx, item["ModelNumber"], item["Model"], item["Status"], item["Storage"], item["Price"], item["Stock"], item["ItemSold"]]
+                    # add the iteration results to rows
                     rows.append(row)
 
+                # print results in table format
                 print(tabulate(rows, headers=headers, tablefmt="simple_outline"))
         
         # execute code if user selects 4
         elif choice == "4":
             second_hand = [item for item in database if item["Status"] == "second"]
 
+            # print message if no second hand item found
             if not second_hand:
                 print("No second-hand items found.")
+            
+            # execute following lines to second hand items
             else:
                 headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock", "ItemSold"]
                 rows = []
@@ -156,13 +170,16 @@ def add_item(database):
             while True:
                 code = input("Input the item code on the back of the box, e.g., A2849: ").upper()
 
+                # check if input consists of one letter + 4 digits
                 if re.match(r"^[A-Za-z]\d{4}$", code):
+                    # check if model number is already in database
                     if any(item["ModelNumber"] == code for item in database):
                         print("This entry already exists. Please try another.")
                         continue
                     else:
                         break
                 else:
+                    # print message if user input invalid model number
                     print("Invalid input. Please input a valid model number as shown on the box.")
 
             model = input("Enter the iPhone model, e.g., 'iPhone 15 Pro Max': ").title()
@@ -171,6 +188,8 @@ def add_item(database):
             # validate storage input
             while True:
                 storage = input("Input the iPhone capacity (in Gb), e.g., 256, 512, or 1000: ")
+
+                # check if storage input is numerical and bigger than 0
                 if storage.isdigit() and int(storage) > 0:
                     break
                 else:
@@ -179,6 +198,8 @@ def add_item(database):
             # validate price input
             while True:
                 price = input("Enter the price (in Rupiahs): ")
+
+                # check if price input is numerical and bigger than 0
                 if price.isdigit() and int(price) > 0:
                     break
                 else:
@@ -188,10 +209,12 @@ def add_item(database):
             while True:
                 try:
                     stock = int(input("Enter the stock quantity: "))
+                    # check if stock greater or equal to 0
                     if stock >= 0:
                         break
                     else:
                         print("Invalid input. The value should be at least 0.")
+                # if user input non-integer, print this error message
                 except ValueError:
                     print("It seems you have entered invalid input for the stock. Please try again.")
             
@@ -199,17 +222,21 @@ def add_item(database):
             while True:
                 try:
                     n_sold = int(input("Enter the number of items sold: "))
+                    # check if sold items bigger than or equal to 0
                     if n_sold >= 0:
                         break
                     else:
                         print("Invalid input. The value should be at least 0.")
+                # if user input non-integer, print this error message
                 except ValueError:
                     print("It seems you have entered invalid input for the ItemSold. Please try again.")
 
             while True:
                 choice = input("Confirm the addition? [Y/N]: ").upper()
 
+                # check if user input Y or YES
                 if choice == "Y" or "YES":
+                    # add the new values to database
                     database.append({"ModelNumber": code,
                             "Model": model,
                             "Status": status,
@@ -222,6 +249,7 @@ def add_item(database):
                     print("Items added successfully. Please check 'Display items' to see the changes. \nWhat do you want to do next?")
                     # go back to main menu
                     return
+                # check if user input N or NO
                 elif choice == "N" or "NO":
                     print("OK. The deletion canceled.")
                     break
@@ -264,7 +292,7 @@ def modify_item(database):
     """Function to modify or update item in database
 
     Args:
-        database (table): Smartphone data
+        database (list): Smartphone data
     """
     while True:
         print("You will modify data in the inventory. Please enter '1' to continue.")
@@ -403,7 +431,7 @@ def modify_item(database):
             print("Invalid input. Please input a valid number (1 or 2).")
 
 
-# REMOVE ITEMS
+# ++++++++++ REMOVE ITEMS ++++++++++
 def remove_item(database):
     """Function to remove item from the database
 
