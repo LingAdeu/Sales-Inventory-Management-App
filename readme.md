@@ -29,7 +29,7 @@ SmartPi is a sales inventory management developed for AppleHome, a fictional sto
         ├── __main__.py      <- The main file used to run the program.
         └── inventory.py     <- The module file containing the functions.
 
+## Installation
+To clone this project, execute the following line of code on your terminal.
 
-## Task
-- To update the readme image header
-- Tidy up 
+    git clone https://github.com/LingAdeu/Capstone-Project-Modul-1.git
