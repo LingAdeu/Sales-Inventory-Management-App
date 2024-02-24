@@ -1,4 +1,4 @@
-![Header](ReadMeHeader.png)
+![Header](NewHeader.png)
 
 ## About
 SmartPi is a sales inventory management developed for AppleHome, a fictional store inspired by a real SME business in Bantul, Yogyakarta. Because this inventory management was designed to access and update the sales inventory, not everyone should be able to use the application (find the dummy credentials below).
@@ -12,18 +12,11 @@ SmartPi is a sales inventory management developed for AppleHome, a fictional sto
 - `manager`: `password1234`
 
 ## Main features
-1. Display items
-	1. This feature allows users to see available items by different options such as all items, low-stock items, brand-new or second-hand items. 
-2. Add a new item
-	1. Users can add a new entry to the existing data.
-	2. Add to DB?
-3. Modify an item
-	1. Users have several options to modify an existing item based on the item ID. Users are free to update whether an entire row or specific column in a row.
-	2. Add to DB?
-4. Remove an item
-	1. An item removal can be performed once the users specify which item ID to remove from the DB. 
-5. Exit and log out
-	1. For security purposes, this program is complemented with the exit menu. Once the users exit, they will be automatically logged out, and they will need to login when they want to operate the app again. 
+1. <b>Display items</b>: This feature allows users to see available items by different options such as all items, low-stock items, brand-new or second-hand items. 
+2. <b>Add a new item</b>: Users can add a new entry to the existing data.
+3. </b>Modify an item</b>: Users have several options to modify an existing item based on the item ID. Users are free to update whether an entire row or specific column in a row.
+4. <b>Remove an item</b>: An item removal can be performed once the users specify which item ID to remove from the DB. 
+5. <b>Exit and log out</b>: For security purposes, this program is complemented with the exit menu. Once the users exit, they will be automatically logged out, and they will need to login when they want to operate the app again. 
 
 ## Project Organization
 
