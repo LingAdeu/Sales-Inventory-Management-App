@@ -8,18 +8,17 @@ SmartPi is a sales inventory management developed for AppleHome, a fictional sto
 > [!IMPORTANT] 
 > For security purposes, only two roles are given the access. Here are dummy credentials that can be used to operate the application.
 
-- `admin`: `admin1234`
-- `manager`: `password1234`
+    `admin`: `admin1234`
+    `manager`: `password1234`
 
 ## Main features
 1. <b>Display items</b>: This feature allows users to see available items by different options such as all items, low-stock items, brand-new or second-hand items. 
 2. <b>Add a new item</b>: Users can add a new entry to the existing data.
-3. </b>Modify an item</b>: Users have several options to modify an existing item based on the item ID. Users are free to update whether an entire row or specific column in a row.
+3. <b>Modify an item</b>: Users have several options to modify an existing item based on the item ID. Users are free to update whether an entire row or specific column in a row.
 4. <b>Remove an item</b>: An item removal can be performed once the users specify which item ID to remove from the DB. 
 5. <b>Exit and log out</b>: For security purposes, this program is complemented with the exit menu. Once the users exit, they will be automatically logged out, and they will need to login when they want to operate the app again. 
 
 ## Project Organization
-
     .
     ├── README.md            <- The top-level README for developers using this project.
     ├── docs
