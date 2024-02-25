@@ -1,8 +1,8 @@
 import inventory
 
-# database
+# database (list)
 database = [
-        {'ModelNumber': 'A2849', 'Model': 'iPhone 15 Pro Max', 'Status': 'new', 'Storage': 512, 'Price': 28999999, 'Stock': 7, 'ItemSold': 9},
+        {'ModelNumber': 'A8249', 'Model': 'iPhone 15 Pro Max', 'Status': 'new', 'Storage': 512, 'Price': 28999999, 'Stock': 7, 'ItemSold': 9},
         {'ModelNumber': 'A3090', 'Model': 'iPhone 15', 'Status': 'new', 'Storage': 256, 'Price': 18499000, 'Stock': 12, 'ItemSold': 14},
         {'ModelNumber': 'A2889', 'Model': 'iPhone 14 Pro', 'Status': 'second', 'Storage': 512, 'Price': 17500000, 'Stock': 15, 'ItemSold': 19},
         {'ModelNumber': 'A3108', 'Model': 'iPhone 13 Pro', 'Status': 'second', 'Storage': 128, 'Price': 12200000, 'Stock': 17, 'ItemSold': 17},
@@ -43,13 +43,12 @@ def menu(database):
             elif choice == "3":
                 inventory.modify_item(database)
             elif choice == "4":
-                # MASIH BELUM 
                 inventory.remove_item(database)
             elif choice == "5":
                 print("Terminating the program. See you later!")
                 break
             else:
-                print("Invlid input. Please enter number (1-5).")
+                print("Invalid input. Please enter number (1-5).")
 
 # call menu() function
 menu(database)

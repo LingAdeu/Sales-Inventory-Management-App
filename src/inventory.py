@@ -304,12 +304,12 @@ def modify_item(database):
 
         if choice == "1":
             print("Here is the current inventory:")
-            headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock"]
+            headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock", "ItemSold"]
             rows = []
 
             # iterate over idx and item in database
             for idx, item in enumerate(database, start=1):
-                row = [idx, item["ModelNumber"], item["Model"], item["Status"], item["Storage"], item["Price"], item["Stock"]]
+                row = [idx, item["ModelNumber"], item["Model"], item["Status"], item["Storage"], item["Price"], item["Stock"], item["ItemSold"]]
                 
                 # add row to rows
                 rows.append(row)
@@ -324,21 +324,22 @@ def modify_item(database):
             # ask user to specify the modification
             while True:
                 print("\nSelect item detail to modify")
-                print("1. Model Number")
+                print("1. Model number")
                 print("2. Model")
                 print("3. Status")
                 print("4. Storage")
                 print("5. Price")
                 print("6. Stock")
-                print("7. Modify All Details")
-                print("8. Cancel")
+                print("7. ItemSold")
+                print("8. Modify all details")
+                print("9. Back to menu")
 
-                choice = input("\nEnter your choice (1-8): ")
+                choice = input("\nEnter your choice (1-9): ")
 
                 if choice == "1":
                     while True:
                     # modify model number
-                        new_model_number = input(f"Enter new model number (current: {item_to_modify['ModelNumber']}): ")
+                        new_model_number = input(f"Enter new model number (current: {item_to_modify['ModelNumber']}): ").upper()
 
                         if re.match(r"^[A-Za-z]\d{4}$", new_model_number):
                             if any(item["ModelNumber"] == new_model_number for item in database):
@@ -353,19 +354,19 @@ def modify_item(database):
 
                 elif choice == "2":
                     # modify model
-                    new_model = input(f"Enter new model number (current: {item_to_modify['Model']}): ")
+                    new_model = input(f"Enter new model (current: {item_to_modify['Model']}): ").title()
                     item_to_modify["Model"] = new_model
                     print("Model updated. Back to main menu to see the update.")
                 
                 elif choice == "3":
                     # modify status
-                    new_status = input(f"Enter new model number (current: {item_to_modify['Status']}): ")
+                    new_status = input(f"Enter new status (current: {item_to_modify['Status']}): ")
                     item_to_modify["Status"] = new_status
                     print("Status has been updated. Back to main menu to see the update.")
                 
                 elif choice == "4":
                     # modify storage
-                    new_storage = input(f"Enter new model number (current: {item_to_modify['Storage']}): ")
+                    new_storage = input(f"Enter new storage (current: {item_to_modify['Storage']}): ")
                     if new_storage.isdigit() and int(new_storage) > 0:
                         item_to_modify["Storage"] = new_storage
                         print("Storage has been updated. Back to main menu to see the update.")
@@ -374,7 +375,7 @@ def modify_item(database):
                 
                 elif choice == "5":
                     # modify price
-                    new_price = input(f"Enter new model number (current: {item_to_modify['Price']}): ")
+                    new_price = input(f"Enter new price amount (current: {item_to_modify['Price']}): ")
                     if new_price.isdigit() and int(new_price) > 0:
                         item_to_modify["Price"] = int(new_price)
                         print("Price has been updated. Back to main menu to see the update.")
@@ -384,7 +385,7 @@ def modify_item(database):
                 elif choice == "6":
                     # modify stock
                     try:
-                        new_stock = input(f"Enter new model number (current: {item_to_modify['Stock']}): ")
+                        new_stock = input(f"Enter new number of stock (current: {item_to_modify['Stock']}): ")
                         if new_stock.isdigit() and int(new_stock) >= 0:
                             item_to_modify["Stock"] = int(new_stock)
                             print("Stock has been updated. Back to main menu to see the update.")
@@ -394,19 +395,33 @@ def modify_item(database):
                         print("Invalid input. Please input a valid number.")
                 
                 elif choice == "7":
+                    # modify item sold
+                    try:
+                        new_item_sold = input(f"Enter new number item sold (current: {item_to_modify['ItemSold']}): ")
+                        if new_item_sold.isdigit() and int(new_item_sold) >= 0:
+                            new_item_sold["Stock"] = int(new_item_sold)
+                            print("Number of items sold has been updated. Back to main menu to see the update.")
+                        else:
+                            print("Sorry, the quantity should be 0 or more. Please try again.")
+                    except ValueError:
+                        print("Invalid input. Please input a valid number.")
+                
+                elif choice == "8":
                     # modify entire row
-                    new_model_number = input(f"Enter new model number (current: {item_to_modify['ModelNumber']}): ")
-                    new_model = input(f"Enter new model number (current: {item_to_modify['Model']}): ")
-                    new_status = input(f"Enter new model number (current: {item_to_modify['Status']}): ")
-                    new_storage = input(f"Enter new model number (current: {item_to_modify['Storage']}): ")
-                    new_price = input(f"Enter new model number (current: {item_to_modify['Price']}): ")
-                    new_stock = input(f"Enter new model number (current: {item_to_modify['Stock']}): ")
+                    new_model_number = input(f"Enter new model number (current: {item_to_modify['ModelNumber']}): ").upper()
+                    new_model = input(f"Enter new model (current: {item_to_modify['Model']}): ").title()
+                    new_status = input(f"Enter new status(current: {item_to_modify['Status']}): ").lower()
+                    new_storage = input(f"Enter new storage (current: {item_to_modify['Storage']}): ")
+                    new_price = input(f"Enter new amount (current: {item_to_modify['Price']}): ")
+                    new_stock = input(f"Enter new number of stock (current: {item_to_modify['Stock']}): ")
+                    new_item_sold = input(f"Enter new quantity of the sold item (current: {item_to_modify['ItemSold']}): ")
 
                     if (
-                        re.match(r"^[A-Za-z]\d{4}$", new_model_number)
-                        and new_model.isdigit()
-                        and new_price.isdigit()
+                        re.match(r"^[A-Za-z]\d{4}$", new_model_number) 
+                        and any(item["ModelNumber"] == new_model_number for item in database)
+                        and new_price.isdigit() and int(new_price) > 0
                         and new_stock.isdigit() and int(new_stock) >= 0
+                        and new_item_sold.isdigit() and int(new_item_sold) >= 0
                     ):
                         item_to_modify.update({
                             "ModelNumber": new_model_number,
@@ -414,13 +429,14 @@ def modify_item(database):
                             "Status": new_status,
                             "Storage": int(new_storage),
                             "Price": int(new_price),
-                            "Stock": int(new_stock)
+                            "Stock": int(new_stock),
+                            "ItemSold": int(new_item_sold)
                         })
                         print("All details have been updated. Back to main menu to see the update.")
                     else:
-                        print("Invalid input. Please check your inputs and try again.")
+                        print("Invalid input(s). Please check your input(s) and try again.")
                     
-                elif choice == "8":
+                elif choice == "9":
                     break
                 else:
                     print("Invalid input. Please enter a valid number (1-8).")
@@ -438,10 +454,10 @@ def remove_item(database):
     Args:
         table (list): Smartphone data
     """
+    print("\nYou will remove an item in the inventory. Please enter '1' to continue.")
     while True:
-        print("\nYou will remove an item in the inventory. Please enter '1' to continue.")
         print("\nMenu")
-        print("1. Continue")
+        print("1. Remove an item")
         print("2. Back to main menu")
 
         choice = input("\nEnter your choice (1 or 2): ")
@@ -465,7 +481,7 @@ def remove_item(database):
 
                 if choice == "Y" or "YES":
                     database.pop(idx - 1)
-                    print(f"ID {idx} has been removed. Go to the main menu to see the update.")
+                    print(f"ID {idx} has been removed. Go to the main menu to see the update.\nWhat do you want to do next?")
                     break
                 elif choice == "N" or "NO":
                     print("OK. The deletion canceled.")
