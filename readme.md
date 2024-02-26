@@ -14,8 +14,8 @@ SmartPi is a sales inventory management developed for AppleHome, a fictional sto
 ## Main features
 1. <b>Display items</b>: This feature allows users to see available items by different options such as all items, low-stock items, brand-new or second-hand items. 
 2. <b>Add a new item</b>: Users can add a new entry to the existing data.
-3. <b>Modify an item</b>: Users have several options to modify an existing item based on the item ID. Users are free to update whether an entire row or specific column in a row.
-4. <b>Remove an item</b>: An item removal can be performed once the users specify which item ID to remove from the DB. 
+3. <b>Modify an item</b>: Users have an option to modify an existing item based on the item ID and they are free to select which item detail(s) to update.
+4. <b>Remove an item</b>: An item removal can be performed once the users specify which item ID to remove from the database. 
 5. <b>Exit and log out</b>: For security purposes, this program is complemented with the exit menu. Once the users exit, they will be automatically logged out, and they will need to login when they want to operate the app again. 
 
 ## Project Organization
