@@ -31,7 +31,7 @@ SmartPi is a sales inventory management developed for AppleHome, a fictional sto
 ## Installation
 To clone this project, execute the following line of code on your terminal.
 
-    git clone https://github.com/LingAdeu/Capstone-Project-Modul-1.git
+    git clone https://github.com/LingAdeu/Sales-Inventory-Management-App.git
 
 ## Collaboration
 Feel free to contact me for collaboration here:
