@@ -36,7 +36,7 @@ def authenticate_user():
         # check username and password if matching with credentials dict
         if username_input in credentials and password_input == credentials[username_input]:
              # print to indicate successful login
-             print(f"\nAuthentication successful.\nWelcome to AppleHome Sales Inventory Management, {username_input}!")
+             print(f"\nAuthentication successful.\nWelcome to AppleHome Sales Inventory Management, {username_input.capitalize()}!")
              return True
         else:
             # Reduce the attempts in each failure
@@ -157,7 +157,7 @@ def add_item(database):
     Args:
         database (list): Smartphone data
     """
-    print("\nTo proceed adding a new entry, please prepare the Item Code, Model, Status, Storage, Price, Stock, and ItemSold.")
+    print("\nTo proceed adding a new entry, please prepare the Item Model Number, Model, Status, Storage, Price, Stock, and ItemSold.")
     while True:
         print("\nMenu")
         print("1. Add an item")
