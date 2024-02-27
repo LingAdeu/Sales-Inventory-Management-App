@@ -160,13 +160,13 @@ def add_item(database):
     print("\nTo proceed adding a new entry, please prepare the Item Code, Model, Status, Storage, Price, Stock, and ItemSold.")
     while True:
         print("\nMenu")
-        print("1. Continue")
+        print("1. Add an item")
         print("2. Back to main menu")
 
         choice = input("\nEnter your choice: ")
     
         if choice == "1":
-            print("\nHere is the snipet of current inventory:")
+            print("\nHere is a snipet of the current inventory:")
             headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock", "ItemSold"]
             rows = []
 
@@ -337,7 +337,7 @@ def modify_item(database):
     while True:
         print("You will modify data in the inventory. Please enter '1' to continue.")
         print("\nMenu")
-        print("1. Continue")
+        print("1. Modify an item")
         print("2. Back to main menu")
 
         choice = input("\nEnter your choice: ")
@@ -363,13 +363,13 @@ def modify_item(database):
 
             while True:
                 print("\nSelect item detail to modify")
-                print("1. Model number")
+                print("1. Model Number")
                 print("2. Model")
                 print("3. Status")
                 print("4. Storage")
                 print("5. Price")
                 print("6. Stock")
-                print("7. ItemSold")
+                print("7. Item Sold")
                 print("8. Back to menu")
 
                 # ask user to specify the modification
@@ -519,7 +519,7 @@ def remove_item(database):
     print("\nYou will remove an item in the inventory. Please enter '1' to continue.")
     while True:
         print("\nMenu")
-        print("1. Continue")
+        print("1. Remove an item")
         print("2. Back to main menu")
 
         choice = input("\nEnter your choice (1 or 2): ")
