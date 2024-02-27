@@ -445,7 +445,7 @@ def modify_item(database):
                             print("What do you want to do next?")
                             break
                         else:
-                            print("Invalid input. Please input a valid amount.")
+                            print("Invalid input. Please input a valid amount (min 3,000,000).")
                 
                 elif choice == "6":
                     # modify stock
