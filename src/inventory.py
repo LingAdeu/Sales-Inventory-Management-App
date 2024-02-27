@@ -316,17 +316,6 @@ def get_valid_index(max_idx, message):
         except ValueError:
             print("Only a number allowed. Please enter a valid number.")
 
-# # ++++++++++ VALIDATE MODEL NUMBER ++++++++++
-# def validate_model_number(model_number, database):
-#     return(
-#         re.match((r"^[A-Za-z]\d{4}$", model_number) and
-#         not any(item["ModelNumber"] == model_number for item in database))
-#     )
-
-# # ++++++++++ VALIDATE POSITIVE DIGIT INPUT ++++++++++
-# def validate_positive_int(value):
-#     return value.isdigit() and int(value) >= 0
-
 # ++++++++++ MODIFY ITEMS ++++++++++
 def modify_item(database):
     """Function to modify or update item in database
