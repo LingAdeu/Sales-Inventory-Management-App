@@ -53,6 +53,11 @@ def display_item(database):
     Args:
         database (list): Smartphone inventory
     """
+    # check if the database is empty
+    if not database:
+        print("The database is empty. There is nothing to show here.")
+        return
+
     while True:
         print("\nMain Menu")
         print("1. Show all items")
@@ -157,6 +162,7 @@ def add_item(database):
     Args:
         database (list): Smartphone data
     """
+
     print("\nTo proceed adding a new entry, please prepare the Item Model Number, Model, Status, Storage, Price, Stock, and ItemSold.")
     while True:
         print("\nMenu")
@@ -166,19 +172,23 @@ def add_item(database):
         choice = input("\nEnter your choice: ")
     
         if choice == "1":
-            print("\nHere is a snipet of the current inventory:")
-            headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock", "ItemSold"]
-            rows = []
+            # check if database is empty
+            if not database:
+                print("The database is empty. You may start adding a new item.")
+            else:
+                print("\nHere is a snipet of the current inventory:")
+                headers = ["ID", "ModelNumber", "Model", "Status", "Storage", "Price", "Stock", "ItemSold"]
+                rows = []
 
-            # iterate over idx and item in database
-            for idx, item in enumerate(database[:5], start=1):
-                row = [idx, item["ModelNumber"], item["Model"], item["Status"], item["Storage"], item["Price"], item["Stock"], item["ItemSold"]]
-                
-                # add row to rows
-                rows.append(row)
+                # iterate over idx and item in database
+                for idx, item in enumerate(database[:5], start=1):
+                    row = [idx, item["ModelNumber"], item["Model"], item["Status"], item["Storage"], item["Price"], item["Stock"], item["ItemSold"]]
+                    
+                    # add row to rows
+                    rows.append(row)
 
-            # display items in table
-            print(tabulate(rows, headers=headers, tablefmt="simple_outline"))
+                # display items in table
+                print(tabulate(rows, headers=headers, tablefmt="simple_outline"))
             while True:
                 # request item code
                 code = input("\nInput the item code on the back of the box, e.g., A8248: ").upper()
@@ -265,7 +275,7 @@ def add_item(database):
                 choice = input("\nConfirm the addition? [Y/N]: ").upper()
 
                 # check if user input Y or YES
-                if choice == "Y" or "YES":
+                if choice == "Y" or choice == "YES":
                     # add the new values to database
                     database.append({"ModelNumber": code,
                             "Model": model,
@@ -280,7 +290,7 @@ def add_item(database):
                     # go back to main menu
                     return
                 # check if user input N or NO
-                elif choice == "N" or "NO":
+                elif choice == "N" or choice == "NO":
                     print("OK. The deletion canceled.")
                     break
                 else:
@@ -292,7 +302,7 @@ def add_item(database):
             break
         else:
             print("Invalid input. Please input a valid number (1 or 2).")
- 
+
 
 #  ++++++++++ VALIDATE INPUT INDEX  ++++++++++ 
 def get_valid_index(max_idx, message):
@@ -313,7 +323,7 @@ def get_valid_index(max_idx, message):
             if 1 <= idx <= max_idx:
                 return idx
             else:
-                print("Sorry, index is invalid. Please type a number between a and {max_idx}")
+                print("Sorry, index is invalid. Please type a valid index.")
         except ValueError:
             print("Only a number allowed. Please enter a valid number.")
 
@@ -324,6 +334,11 @@ def modify_item(database):
     Args:
         database (list): Smartphone data
     """
+    # check if database is empty
+    if not database:
+        print("The database is empty. There is nothing to modify.")
+        return
+    
     while True:
         print("You will modify data in the inventory. Please enter '1' to continue.")
         print("\nMenu")
@@ -382,7 +397,7 @@ def modify_item(database):
                                 print("What do you want to do next?")
                                 break
                         else:
-                            print("Invalid input. Please input a valid model number based on the box: ")
+                            print("Invalid input. Please input a valid model number based on the box.")
 
                 elif choice == "2":
                     # modify model
@@ -477,7 +492,7 @@ def modify_item(database):
                             # check if new item sold input is numerical and bigger or equal to 0
                             if new_item_sold.isdigit() and int(new_item_sold) >= 0:
                                 # update the current value with the user input
-                                item_to_modify["Stock"] = int(new_item_sold)
+                                item_to_modify["ItemSold"] = int(new_item_sold)
                                 print("\nNumber of items sold has been updated. Back to main menu to see the update.")
                                 print("What do you want to do next?")
                                 break
@@ -506,6 +521,11 @@ def remove_item(database):
     Args:
         table (list): Smartphone data
     """
+    # check if database is empty
+    if not database:
+        print("The database is empty. There are no items to remove.")
+        return
+    
     print("\nYou will remove an item in the inventory. Please enter '1' to continue.")
     while True:
         print("\nMenu")
@@ -533,12 +553,12 @@ def remove_item(database):
                 # request user to confirm
                 choice = input("\nConfirm the deletion? [Y/N]: ").upper()
 
-                if choice == "Y" or "YES":
+                if choice == "Y" or choice == "YES":
                     # remove after confirmed
                     database.pop(idx - 1)
                     print(f"ID {idx} has been removed. Go to the main menu to see the update.\nWhat do you want to do next?")
                     break
-                elif choice == "N" or "NO":
+                elif choice == "N" or choice == "NO":
                     print("OK. The deletion canceled.")
                     break
                 else:
