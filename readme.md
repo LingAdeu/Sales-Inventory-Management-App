@@ -1,7 +1,7 @@
 ![Flaticon-Inventory-Management](NewHeader.png)
 
 ## About
-SmartPi is a simple sales inventory management app developed for AppleHome, a fictional store inspired by a real small and medium enterprise (SME) business in Bantul, the Special Region of Yogyakarta. Because this inventory management was designed to access and update the sales inventory, not everyone should be able to operate the application (find the dummy credentials below).
+SmartPi is a simple sales inventory management app developed for AppleHome, a fictional store inspired by a real small and medium enterprise (SME) business in Bantul, the Special Region of Yogyakarta. Because this inventory management was designed to be accessed by authorized staff only, people without credentials should not be able to operate the app for security reasons.
 
 ## Credentials
 

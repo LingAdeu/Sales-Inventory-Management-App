@@ -223,17 +223,17 @@ def add_item(database):
                 if storage.isdigit() and int(storage) >= 64:
                     break
                 else:
-                    print("Invalid input. Please input a valid number for storage (in Gb): ")
+                    print("Invalid input. Please input a valid number for storage (at least 64 Gb): ")
             
             # validate price input
             while True:
-                price = input("Enter the price (in Rupiahs): ")
+                price = input("Enter the price (in Rupiahs, at least 3000000): ")
 
                 # check if price input is numerical and bigger than 0
                 if price.isdigit() and int(price) >= 3000000:
                     break
                 else:
-                    print("Invalid input. Please input a valid amount: ")
+                    print("Invalid input. Please input a valid amount in Gigabyte (Gb): ")
             
             # validate stock input
             while True:
@@ -309,6 +309,7 @@ def get_valid_index(max_idx, message):
         try:
             # request input
             idx = int(input(message))
+            # check if idx is at least 1 and less than or equal to max_idx
             if 1 <= idx <= max_idx:
                 return idx
             else:
@@ -545,4 +546,4 @@ def remove_item(database):
         elif choice == "2":
             break
         else:
-            "Invalid input. Please enter a valid number (1 or 2)."
+            print("Invalid input. Please enter a valid number (1 or 2).")
